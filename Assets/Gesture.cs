@@ -28,6 +28,7 @@ public class Gesture : MonoBehaviour {
 		private Hand rightHand;
 		private bool isHandOpen;
 		private bool isHandClosed;
+		private bool isHorns;
 		private bool isSwiping;
 		private float checkIdleTimer;
 
@@ -117,6 +118,36 @@ public class Gesture : MonoBehaviour {
 
 		return false;
 	}
+
+	 
+	public bool horns(){
+
+		initializeFingersHands ();
+
+		foreach (Hand hand in frame.Hands) {
+
+			if (hasHands) {
+
+				if (!deactivate && !isSwiping && !isPinching && pinkyFinger.IsExtended && indexFinger.IsExtended && !middleFinger.IsExtended && !ringFinger.IsExtended) {
+
+					isHorns = true;
+					StartCoroutine (timer(0.4f));
+					return true;
+
+				} else {
+
+					isHorns = false;
+
+				}
+
+			}  
+		}
+
+		return false;
+	}
+
+
+
 
 	public bool closeHand(){
 
