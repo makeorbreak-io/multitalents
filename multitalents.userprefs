@@ -1,6 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\end.cs">
+    <Files>
+      <File FileName="Assets\SkipToPlay.cs" Line="17" Column="17" />
+      <File FileName="Assets\Script\Game.cs" Line="115" Column="30" />
+      <File FileName="Assets\Beginning.cs" Line="72" Column="18" />
+      <File FileName="Assets\Script\Gesture.cs" Line="188" Column="141" />
+      <File FileName="Assets\Script\end.cs" Line="28" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

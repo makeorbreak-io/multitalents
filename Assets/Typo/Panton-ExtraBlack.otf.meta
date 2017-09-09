@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 688d41a87211d70459df1ddb47b14752
+timeCreated: 1504972136
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Panton ExtraBlack
+  fontNames:
+  - Panton ExtraBlack
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4f3290e853490034d9349f996cb8eee8, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

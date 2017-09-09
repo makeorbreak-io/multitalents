@@ -33,8 +33,17 @@ public class Game : MonoBehaviour {
 
 	private bool alternateHand;
 
+	public GameObject part1;
 	public GameObject part3;
-	public GameObject part4;
+	public GameObject ending;
+	public GameObject countdown;
+	public GameObject GameGO;
+
+	public Image pBar;
+	public Text stageText;
+	public Text taskD;
+	public Text times;
+
 
 	// Use this for initialization
 	void Start () {
@@ -68,60 +77,12 @@ public class Game : MonoBehaviour {
 	}
 
 
-	private void gestureHandler(){
-	
-		/*if (gesture.openHand()) {
-		
-		
-			Debug.Log ("OPEN");
-		
-		}*/
 
-		if (gesture.closeHand()) {
-
-
-			Debug.Log ("Close");
-
-		}
-
-		/*if (gesture.pinch()) {
-
-
-			Debug.Log ("pinch");
-
-		}*/
-
-		if (gesture.horns()) {
-
-
-			Debug.Log ("horns");
-
-		}
-
-
-		//gesture.printVelocity ();
-
-		if (gesture.swipeLeft(sensitivitySwipeLeft, delaySwipeLeft)) {
-
-
-			Debug.Log ("Swipe Left");
-
-		}
-
-		if (gesture.swipeRight(sensitivitySwipeRight, delaySwipeRight)) {
-
-
-			Debug.Log ("Swipe Right");
-
-		}
-	
-	
-	}
 
 	private void generateTask(){
 
-		//task = Mathf.RoundToInt(Random.value*9);
-		task=5;
+		//task = Mathf.RoundToInt(Random.value*5);
+		task=0;
 
 		if (task == 1 || task==4 || task==5) {
 
@@ -139,7 +100,7 @@ public class Game : MonoBehaviour {
 		
 		}
 
-
+	
 	}
 
 	private void gameTimeHandler(){
@@ -164,15 +125,9 @@ public class Game : MonoBehaviour {
 		if (task == 0 && !moving) {
 		
 			////////////////////CONTEÚDO Gráfico//////////////////
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// ////////////////////////////////////////////////////
+
+			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
+			taskD.text = "Pinch";
 
 
 			if (taskCounter != targetTask) {
@@ -190,7 +145,7 @@ public class Game : MonoBehaviour {
 				movingTime = 0;
 				moving = true;
 				generateTask ();
-
+				stageNumber++;
 			}
 			 
 		}
@@ -416,15 +371,22 @@ public class Game : MonoBehaviour {
 
 				movingTime += Time.deltaTime;
 
-				stages [currentStage].transform.position = Vector3.Lerp (initialPosition [currentStage], new Vector3 (initialPosition [currentStage].x, initialPosition [currentStage].y + 656, initialPosition [currentStage].z), movingTime * (movingTime / targetMovingTime));
-				stages [newStage].transform.position = Vector3.Lerp (new Vector3 (initialPosition [newStage].x, initialPosition [newStage].y - 656, initialPosition [newStage].z), initialPosition [newStage], movingTime * (movingTime / targetMovingTime));
+				stages [currentStage].transform.position = Vector3.Lerp (initialPosition [currentStage], new Vector3 (initialPosition [currentStage].x, initialPosition [currentStage].y + 525, initialPosition [currentStage].z), movingTime * (movingTime / targetMovingTime));
+				stages [newStage].transform.position = Vector3.Lerp (new Vector3 (initialPosition [newStage].x, initialPosition [newStage].y - 525, initialPosition [newStage].z), initialPosition [newStage], movingTime * (movingTime / targetMovingTime));
 
 			} else {
 
 
 				stages [currentStage].SetActive (false);
 				movingTime = 0;
-				newStage = currentStage;
+				currentStage = newStage;
+
+				while(newStage==currentStage){
+
+					newStage=Mathf.RoundToInt(Random.value*9);
+
+				}
+
 				moving = false;
 
 			}
@@ -434,7 +396,16 @@ public class Game : MonoBehaviour {
 	}
 
 
+	IEnumerator timerEnding(){
 
+		yield return new WaitForSeconds (10);
+
+
+		part1.SetActive (true);
+		ending.gameObject.SetActive (false);
+
+
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -443,15 +414,17 @@ public class Game : MonoBehaviour {
 		
 			taskToDo ();
 			nextStage ();
-			Debug.Log (taskCounter + "/" + targetTask);
-			Debug.Log (gameTime);
+			//Debug.Log (taskCounter + "/" + targetTask);
+			//Debug.Log (gameTime);
 			gameTimeHandler ();
 
 		} else {
 			temporizador.fillAmount = 1;
-			part4.SetActive (true);
-			part3.gameObject.SetActive (false);
+			ending.SetActive (true);
+			GameGO.gameObject.SetActive (false);
+
 			gameTime = 180;
+
 			generateTask ();
 
 		

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ec31731afdc63c048bbd38156d0e29d5
+timeCreated: 1504972137
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Panton Black
+  fontNames:
+  - Panton Black
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b23445ff89170e5498300cbb6480e5f3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

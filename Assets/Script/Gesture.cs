@@ -185,7 +185,7 @@ public class Gesture : MonoBehaviour {
 
 			if (hasHands) {
 
-				if (!deactivate && !isSwiping && hand.PinchStrength > 0.7f) {
+				if (!deactivate && !isSwiping && hand.PinchStrength > 0.7f && middleFinger.IsExtended && ringFinger.IsExtended && pinkyFinger.IsExtended) {
 
 					isPinching = true;
 					StartCoroutine (timer(0.6f));

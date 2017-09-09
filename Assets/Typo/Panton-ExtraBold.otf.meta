@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2c4a2014df831d04ba52e9e718fac232
+timeCreated: 1504972136
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Panton ExtraBold
+  fontNames:
+  - Panton ExtraBold
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

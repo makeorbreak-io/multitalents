@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: ee18fafb83019a644adee79df3c91e8d
+timeCreated: 1504972137
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Panton
+  fontNames:
+  - Panton
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b83575f7fe76ba046bd3216e76aa8493, type: 3}
+  - {fileID: 12800000, guid: 058584ec41800a044866d7eb889488bd, type: 3}
+  - {fileID: 12800000, guid: a4aa474e801ed4a4f9a89954211454c8, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
