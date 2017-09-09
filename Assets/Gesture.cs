@@ -101,7 +101,7 @@ public class Gesture : MonoBehaviour {
 		
 			if (hasHands) {
 			
-				if (!deactivate && !isSwiping && !isPinching && !isHandClosed && hand.GrabStrength < 0.2f) {
+				if (!deactivate && !isSwiping && !isPinching && hand.GrabStrength < 0.2f) {
 
 					isHandOpen = true;
 					StartCoroutine (timer(0.4f));
@@ -188,7 +188,7 @@ public class Gesture : MonoBehaviour {
 				if (!deactivate && !isSwiping && hand.PinchStrength > 0.7f) {
 
 					isPinching = true;
-					StartCoroutine (timer(0.4f));
+					StartCoroutine (timer(0.6f));
 					return true;
 
 				} else {

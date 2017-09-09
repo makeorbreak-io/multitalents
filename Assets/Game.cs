@@ -6,7 +6,7 @@ public class Game : MonoBehaviour {
 
 
 
-	private Gesture gesture;
+	public Gesture gesture;
 	public float delaySwipeLeft;
 	public float delaySwipeRight;
 	public float sensitivitySwipeLeft;
@@ -14,17 +14,22 @@ public class Game : MonoBehaviour {
 	private List<GameObject> stages;
 	private List<Vector3> initialPosition;
 
+	private int task;
+
 	private bool moving;
 	private float movingTime;
 	public float targetMovingTime;
 
 	private int newStage;
 	private int currentStage;
+	private int taskCounter;
+	private int targetTask;
+
+	private bool alternateHand;
 
 	// Use this for initialization
 	void Start () {
 
-		gesture = GameObject.FindObjectOfType<Gesture> ();
 
 		stages= new List<GameObject>(); 
 		initialPosition= new List<Vector3>(); 
@@ -45,14 +50,9 @@ public class Game : MonoBehaviour {
 
 		}
 
-		moving = true;
+	
 
-
-		movingTime = 0;
-
-
-		/////////////////////7
-
+		generateTask ();
 
 
 
@@ -109,6 +109,105 @@ public class Game : MonoBehaviour {
 	
 	}
 
+	private void generateTask(){
+
+		//task = Mathf.RoundToInt(Random.value*9);
+		task=1;
+		targetTask=Mathf.RoundToInt(Random.value*2+1);
+
+	}
+
+	private void taskToDo(){
+
+	
+		if (task == 0) {
+		
+			////////////////////CONTEÚDO Gráfico//////////////////
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// ////////////////////////////////////////////////////
+
+
+			if (taskCounter != targetTask) {
+
+				if (gesture.pinch ()) {
+
+					taskCounter++;
+
+				}
+
+
+			} else {
+			
+				taskCounter = 0;
+				movingTime = 0;
+				moving = true;
+				generateTask ();
+
+			}
+			 
+		}
+
+		if (task == 1) {
+
+			////////////////////CONTEÚDO Gráfico//////////////////
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// ////////////////////////////////////////////////////
+
+
+			if (taskCounter != targetTask) {
+
+				if (!alternateHand) {
+
+					if (gesture.closeHand ()) {
+						
+						alternateHand = true;
+						Debug.Log ("Entra1");
+					}
+
+				} 
+
+
+				if(alternateHand) {
+				
+					if (gesture.openHand ()) {
+						Debug.Log ("Entra2");
+						taskCounter++;
+					
+					}
+				
+				}
+
+
+
+
+			} else {
+
+				taskCounter = 0;
+				movingTime = 0;
+				moving = true;
+				generateTask ();
+				alternateHand = false;
+			}
+
+		}
+	
+	}
+
+
 	private void nextStage(){
 	
 
@@ -149,11 +248,11 @@ public class Game : MonoBehaviour {
 
 
 
-		
-			nextStage ();
 
-
-
+		taskToDo ();
+		nextStage ();
+		Debug.Log (taskCounter+"/"+ targetTask);
+		//Debug.Log("AlternateHand:" + alternateHand);
 
 	}
 }
