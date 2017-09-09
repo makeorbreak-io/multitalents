@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
 
 
-
+	public Remap remap;
 	public Gesture gesture;
 	public float delaySwipeLeft;
 	public float delaySwipeRight;
@@ -14,18 +15,26 @@ public class Game : MonoBehaviour {
 	private List<GameObject> stages;
 	private List<Vector3> initialPosition;
 
+	public Image temporizador;
+
 	private int task;
+
+	private float gameTime;
 
 	private bool moving;
 	private float movingTime;
 	public float targetMovingTime;
 
+	private int stageNumber;
 	private int newStage;
 	private int currentStage;
 	private int taskCounter;
 	private int targetTask;
 
 	private bool alternateHand;
+
+	public GameObject part3;
+	public GameObject part4;
 
 	// Use this for initialization
 	void Start () {
@@ -50,7 +59,7 @@ public class Game : MonoBehaviour {
 
 		}
 
-	
+		gameTime = 180;
 
 		generateTask ();
 
@@ -112,15 +121,47 @@ public class Game : MonoBehaviour {
 	private void generateTask(){
 
 		//task = Mathf.RoundToInt(Random.value*9);
-		task=1;
-		targetTask=Mathf.RoundToInt(Random.value*2+1);
+		task=5;
+
+		if (task == 1 || task==4 || task==5) {
+
+			targetTask = Mathf.RoundToInt (Random.value * 3 + 3);
+
+			while (targetTask!=2 && targetTask!=4 && targetTask!=6) {
+
+				targetTask = Mathf.RoundToInt (Random.value * 3 + 3);
+			}
+
+
+		} else {
+		
+			targetTask=Mathf.RoundToInt(Random.value*2+1);
+		
+		}
+
 
 	}
+
+	private void gameTimeHandler(){
+
+		if (gameTime > 0) {
+	
+			gameTime -= Time.deltaTime;
+			temporizador.fillAmount = remap.remap (gameTime, 0, 180, 0, 1);
+		
+		} else {
+		
+			this.gameObject.SetActive (false);
+		
+		}
+
+	}
+
 
 	private void taskToDo(){
 
 	
-		if (task == 0) {
+		if (task == 0 && !moving) {
 		
 			////////////////////CONTEÚDO Gráfico//////////////////
 			/// 
@@ -154,7 +195,7 @@ public class Game : MonoBehaviour {
 			 
 		}
 
-		if (task == 1) {
+		if (task == 1 && !moving) {
 
 			////////////////////CONTEÚDO Gráfico//////////////////
 			/// 
@@ -170,27 +211,88 @@ public class Game : MonoBehaviour {
 
 			if (taskCounter != targetTask) {
 
-				if (!alternateHand) {
-
-					if (gesture.closeHand ()) {
+					if (gesture.closeHand () && !alternateHand) {
 						
 						alternateHand = true;
 						Debug.Log ("Entra1");
+						taskCounter++;
 					}
 
-				} 
 
-
-				if(alternateHand) {
-				
-					if (gesture.openHand ()) {
+					if (gesture.openHand () && alternateHand) {
+					
+						alternateHand = false;
 						Debug.Log ("Entra2");
 						taskCounter++;
 					
 					}
-				
+			
+
+			} else {
+
+				taskCounter = 0;
+				movingTime = 0;
+				moving = true;
+				generateTask ();
+				alternateHand = false;
+			}
+
+		}
+
+		if (task == 2 && !moving) {
+
+			////////////////////CONTEÚDO Gráfico//////////////////
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// ////////////////////////////////////////////////////
+
+
+			if (taskCounter != targetTask) {
+
+				if (gesture.swipeLeft (sensitivitySwipeLeft, delaySwipeLeft) ) {
+
+					taskCounter++;
 				}
 
+
+
+			} else {
+
+				taskCounter = 0;
+				movingTime = 0;
+				moving = true;
+				generateTask ();
+				alternateHand = false;
+			}
+
+		}
+
+		if (task == 3 && !moving) {
+
+			////////////////////CONTEÚDO Gráfico//////////////////
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// ////////////////////////////////////////////////////
+
+
+			if (taskCounter != targetTask) {
+
+				if (gesture.swipeRight (sensitivitySwipeRight, delaySwipeRight) ) {
+
+					taskCounter++;
+				}
 
 
 
@@ -205,6 +307,95 @@ public class Game : MonoBehaviour {
 
 		}
 	
+		if (task == 4 && !moving) {
+
+			////////////////////CONTEÚDO Gráfico//////////////////
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// ////////////////////////////////////////////////////
+
+
+			if (taskCounter != targetTask) {
+
+				if (gesture.horns () && !alternateHand) {
+
+					alternateHand = true;
+
+					taskCounter++;
+				}
+
+
+				if (gesture.openHand () && alternateHand) {
+
+					alternateHand = false;
+		
+					taskCounter++;
+
+				}
+
+
+			} else {
+
+				taskCounter = 0;
+				movingTime = 0;
+				moving = true;
+				generateTask ();
+				alternateHand = false;
+			}
+
+		}
+
+		if (task == 5 && !moving) {
+
+			////////////////////CONTEÚDO Gráfico//////////////////
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// 
+			/// ////////////////////////////////////////////////////
+
+
+			if (taskCounter != targetTask) {
+
+				if (gesture.swipeLeft (sensitivitySwipeLeft, delaySwipeLeft) && !alternateHand) {
+
+					alternateHand = true;
+
+					taskCounter++;
+				}
+
+
+				if (gesture.swipeRight (sensitivitySwipeRight, delaySwipeRight) && alternateHand) {
+
+					alternateHand = false;
+
+					taskCounter++;
+
+				}
+
+
+			} else {
+
+				taskCounter = 0;
+				movingTime = 0;
+				moving = true;
+				generateTask ();
+				alternateHand = false;
+			}
+
+		}
+
+
 	}
 
 
@@ -218,7 +409,7 @@ public class Game : MonoBehaviour {
 				
 				Debug.Log ("Entra");
 				Debug.Log ("CurrentStage" + currentStage);
-				Debug.Log ("newStage" + newStage);
+				Debug.Log ("newStage" + newStage); 
 				Debug.Log (stages [newStage].transform.position);
 				stages [currentStage].SetActive (true);
 				stages [newStage].SetActive (true);
@@ -243,16 +434,30 @@ public class Game : MonoBehaviour {
 	}
 
 
+
+
 	// Update is called once per frame
 	void Update () {
 
+		if (gameTime > 0) {
+		
+			taskToDo ();
+			nextStage ();
+			Debug.Log (taskCounter + "/" + targetTask);
+			Debug.Log (gameTime);
+			gameTimeHandler ();
+
+		} else {
+			temporizador.fillAmount = 1;
+			part4.SetActive (true);
+			part3.gameObject.SetActive (false);
+			gameTime = 180;
+			generateTask ();
+
+		
+		}
 
 
-
-		taskToDo ();
-		nextStage ();
-		Debug.Log (taskCounter+"/"+ targetTask);
-		//Debug.Log("AlternateHand:" + alternateHand);
 
 	}
 }

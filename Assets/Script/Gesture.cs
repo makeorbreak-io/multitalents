@@ -30,13 +30,13 @@ public class Gesture : MonoBehaviour {
 		private bool isHandClosed;
 		private bool isHorns;
 		private bool isSwiping;
-		private float checkIdleTimer;
+
 
 		// Use this for initialization
 		void Start () {
 
 			provider = FindObjectOfType<LeapProvider>() as LeapProvider;
-			checkIdleTimer = 10;
+
 			nrHands = 0;
 
 		}

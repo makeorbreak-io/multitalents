@@ -51,8 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Game.cs" />
-     <Compile Include="Assets\Gesture.cs" />
      <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\SlidingMax.cs" />
      <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\SmoothedFloat.cs" />
      <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\SmoothedQuaternion.cs" />
@@ -184,6 +182,11 @@
      <Compile Include="Assets\LeapMotion\Core\Scripts\VR\LeapVRTemporalWarping.cs" />
      <Compile Include="Assets\LeapMotion\Core\Scripts\VR\TemporalWarpingStatus.cs" />
      <Compile Include="Assets\LeapMotion\Core\Scripts\VR\VRHeightOffset.cs" />
+     <Compile Include="Assets\Script\end.cs" />
+     <Compile Include="Assets\Script\Game.cs" />
+     <Compile Include="Assets\Script\Gesture.cs" />
+     <Compile Include="Assets\Script\Remap.cs" />
+     <Compile Include="Assets\SkipToPlay.cs" />
      <None Include="Assets\LeapMotion\Core\Resources\LeapCG.cginc" />
      <None Include="Assets\LeapMotion\Core\README_BEFORE_UPDATING.txt" />
      <None Include="Assets\LeapMotion\Core\readme.txt" />
