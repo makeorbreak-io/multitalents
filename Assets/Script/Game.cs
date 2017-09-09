@@ -40,6 +40,18 @@ public class Game : MonoBehaviour {
 	public GameObject GameGO;
 	public GameObject GameCanvas;
 
+	public GameObject zeroG;
+	public GameObject umG;
+	public GameObject doisG;
+	public GameObject tresG;
+	public GameObject quatroG;
+	public GameObject cincoG;
+	public GameObject seisG;
+	public GameObject seteG;
+	public GameObject oitoG;
+	public GameObject noveG;
+
+
 	public Image circle;
 	public Text stageText;
 	public Text taskD;
@@ -84,8 +96,7 @@ public class Game : MonoBehaviour {
 
 	private void generateTask(){
 
-		//task = Mathf.RoundToInt(Random.value*5);
-		task=0;
+		task = Mathf.RoundToInt(Random.value*5);
 
 		if (task == 1 || task==4 || task==5) {
 
@@ -102,6 +113,7 @@ public class Game : MonoBehaviour {
 			targetTask=Mathf.RoundToInt(Random.value*2+1);
 		
 		}
+
 		counterTask = targetTask;
 		counterCircle = targetTask;
 		times.text=counterTask+"x";
@@ -132,27 +144,29 @@ public class Game : MonoBehaviour {
 			////////////////////CONTEÚDO Gráfico//////////////////
 
 			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
-			taskD.text = "Pinch";
+			taskD.text = "Pinch!";
 
 
 			if (counterTask > 0) {
 
 				if (gesture.pinch ()) {
 
-					counterTask--;
-					times.text = counterTask + "x";
-					counterCircle -= 1 / targetTask;
-					circle.fillAmount = counterCircle;
+						counterTask--;
+
+					if (counterTask >=1) {
+						times.text = counterTask + "x";	
+					}
+				//	counterCircle -= 1 / targetTask;
+				//	circle.fillAmount = counterCircle;
 				}
 
 
 			} else {
 			
-
+				GameCanvas.gameObject.SetActive (false);
 				movingTime = 0;
 				moving = true;
-
-				generateTask ();
+				circle.fillAmount = 1;
 				stageNumber++;
 			}
 			 
@@ -172,17 +186,25 @@ public class Game : MonoBehaviour {
 					if (gesture.closeHand () && !alternateHand) {
 						
 						alternateHand = true;
-					counterTask--;
-					times.text = counterTask + "x";
-					circle.fillAmount -= 1 / targetTask;
+				
+						counterTask--;
+
+					if (counterTask >=1) {
+						times.text = counterTask + "x";	
+					}
+						circle.fillAmount -= 1 / targetTask;
 					}
 
 
 					if (gesture.openHand () && alternateHand) {
 					
 						alternateHand = false;
-					counterTask--;
-					times.text = counterTask + "x";
+				
+						counterTask--;
+
+					if (counterTask >=1) {
+						times.text = counterTask + "x";	
+					}
 					circle.fillAmount -= 1 / targetTask;
 
 					
@@ -191,35 +213,31 @@ public class Game : MonoBehaviour {
 
 			} else {
 
+				alternateHand = false;
+				GameCanvas.gameObject.SetActive (false);
 				movingTime = 0;
 				moving = true;
-				generateTask ();
-				alternateHand = false;
 				circle.fillAmount = 1;
+				stageNumber++;
 			}
 
 		}
 
 		if (task == 2 && !moving) {
 
-			////////////////////CONTEÚDO Gráfico//////////////////
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// ////////////////////////////////////////////////////
+			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
+			taskD.text = "SWIPE LEFT";
 
 
 			if (counterTask > 0) {
 
 				if (gesture.swipeLeft (sensitivitySwipeLeft, delaySwipeLeft) ) {
 
-					counterTask--;
-					times.text = counterTask + "x";
+						counterTask--;
+
+					if (counterTask >=1) {
+						times.text = counterTask + "x";	
+					}
 					circle.fillAmount -= 1 / targetTask;
 				}
 
@@ -227,64 +245,50 @@ public class Game : MonoBehaviour {
 
 			} else {
 
-
+				GameCanvas.gameObject.SetActive (false);
 				movingTime = 0;
 				moving = true;
-				generateTask ();
-				alternateHand = false;
 				circle.fillAmount = 1;
+				stageNumber++;
 			}
 
 		}
 
 		if (task == 3 && !moving) {
 
-			////////////////////CONTEÚDO Gráfico//////////////////
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// ////////////////////////////////////////////////////
+			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
+			taskD.text = "SWIPE RIGHT";
 
 
 			if (counterTask > 0) {
 
 				if (gesture.swipeRight (sensitivitySwipeRight, delaySwipeRight) ) {
 
-					counterTask--;
-					times.text = counterTask + "x";
+						counterTask--;
+
+					if (counterTask >= 1) {
+						times.text = counterTask + "x";	
+					}
 					circle.fillAmount -= 1 / targetTask;
 				}
 
 
 
 			} else {
-
+				
+				GameCanvas.gameObject.SetActive (false);
 				movingTime = 0;
 				moving = true;
-				generateTask ();
-				alternateHand = false;
 				circle.fillAmount = 1;
+				stageNumber++;
 			}
 
 		}
 	
 		if (task == 4 && !moving) {
 
-			////////////////////CONTEÚDO Gráfico//////////////////
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// ////////////////////////////////////////////////////
+			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
+			taskD.text = "Horns!";
 
 
 			if (counterTask > 0) {
@@ -293,8 +297,13 @@ public class Game : MonoBehaviour {
 
 					alternateHand = true;
 
-					counterTask--;
-					times.text = counterTask + "x";
+
+						counterTask--;
+
+					
+					if (counterTask >=1) {
+						times.text = counterTask + "x";	
+					}
 					circle.fillAmount -= 1 / targetTask;
 				}
 
@@ -303,36 +312,34 @@ public class Game : MonoBehaviour {
 
 					alternateHand = false;
 		
-					counterTask--;
-					times.text = counterTask + "x";
+
+
+						counterTask--;
+
+					if (counterTask >=1) {
+						times.text = counterTask + "x";	
+					}
 					circle.fillAmount -= 1 / targetTask;
 
 				}
 
 
 			} else {
-
+				
+				GameCanvas.gameObject.SetActive (false);
+				alternateHand = false;
 				movingTime = 0;
 				moving = true;
-				generateTask ();
-				alternateHand = false;
 				circle.fillAmount = 1;
+				stageNumber++;
 			}
 
 		}
 
 		if (task == 5 && !moving) {
 
-			////////////////////CONTEÚDO Gráfico//////////////////
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// 
-			/// ////////////////////////////////////////////////////
+			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
+			taskD.text = "SWIPE LEFT, THEN \nSWIPE RIGHT";
 
 
 			if (counterTask > 0) {
@@ -340,8 +347,13 @@ public class Game : MonoBehaviour {
 				if (gesture.swipeLeft (sensitivitySwipeLeft, delaySwipeLeft) && !alternateHand) {
 
 					alternateHand = true;
-					counterTask--;
-					times.text = counterTask + "x";
+
+						counterTask--;
+
+					if (counterTask >= 1) {
+						
+						times.text = counterTask + "x";	
+					}
 					circle.fillAmount -= 1 / targetTask;
 				}
 
@@ -349,22 +361,26 @@ public class Game : MonoBehaviour {
 				if (gesture.swipeRight (sensitivitySwipeRight, delaySwipeRight) && alternateHand) {
 
 					alternateHand = false;
-					counterTask--;
-					times.text = counterTask + "x";
+				
+						counterTask--;
+
+
+					if (counterTask >=1) {
+						times.text = counterTask + "x";	
+					}
 					circle.fillAmount -= 1 / targetTask;
 
 				}
 
 
 			} else {
-
-
-
+				
+				GameCanvas.gameObject.SetActive (false);
+				alternateHand = false;
 				movingTime = 0;
 				moving = true;
-				generateTask ();
-				alternateHand = false;
 				circle.fillAmount = 1;
+				stageNumber++;
 			}
 
 		}
@@ -378,6 +394,7 @@ public class Game : MonoBehaviour {
 
 
 		if (moving) {
+			
 
 			GameCanvas.gameObject.SetActive (false);
 
@@ -396,17 +413,24 @@ public class Game : MonoBehaviour {
 
 
 				stages [currentStage].SetActive (false);
-				movingTime = 0;
 				currentStage = newStage;
 
+				newStage = Mathf.RoundToInt(Random.value * 9);
+
+				while(newStage == currentStage) {
+
+					newStage = Mathf.RoundToInt(Random.value * 9);
+
+				}
+				movingTime = 0;
+				generateTask ();
 				moving = false;
 
 			}
 
 		} else {
-		
-			GameCanvas.gameObject.SetActive (true);
 
+			GameCanvas.gameObject.SetActive (true);
 		}
 	
 	}
@@ -418,6 +442,16 @@ public class Game : MonoBehaviour {
 
 		stageNumber = 1;
 		part1.SetActive (true);
+		zeroG.SetActive (true);
+		umG.SetActive (false);
+		doisG.SetActive (false);
+		tresG.SetActive (false);
+		quatroG.SetActive (false);
+		cincoG.SetActive (false);
+		seisG.SetActive (false);
+		seteG.SetActive (false);
+		oitoG.SetActive (false);
+		noveG.SetActive (false);
 		ending.gameObject.SetActive (false);
 
 
@@ -432,15 +466,27 @@ public class Game : MonoBehaviour {
 			nextStage ();
 			Debug.Log ("newStage"+ newStage);
 			Debug.Log ("currentStage"+ currentStage);
-		//	Debug.Log ("counterCircle"+ counterCircle);
-			//Debug.Log ("counterTask"+ counterTask);
+		    //Debug.Log ("counterCircle"+ counterCircle);
+		//	Debug.Log ("counterTask"+ counterTask);
 			gameTimeHandler ();
 
 		} else {
 			temporizador.fillAmount = 1;
 			ending.SetActive (true);
-			GameGO.gameObject.SetActive (false);
+
 			circle.fillAmount = 1;
+
+			zeroG.SetActive (false);
+			umG.SetActive (false);
+			doisG.SetActive (false);
+			tresG.SetActive (false);
+			quatroG.SetActive (false);
+			cincoG.SetActive (false);
+			seisG.SetActive (false);
+			seteG.SetActive (false);
+			oitoG.SetActive (false);
+			noveG.SetActive (false);
+
 
 			GameCanvas.gameObject.SetActive (false);
 			gameTime = 180;

@@ -128,7 +128,7 @@ public class Gesture : MonoBehaviour {
 
 			if (hasHands) {
 
-				if (!deactivate && !isSwiping && !isPinching && pinkyFinger.IsExtended && indexFinger.IsExtended && !middleFinger.IsExtended && !ringFinger.IsExtended) {
+				if (!deactivate && !isSwiping && pinkyFinger.IsExtended && indexFinger.IsExtended && !middleFinger.IsExtended && !ringFinger.IsExtended) {
 
 					isHorns = true;
 					StartCoroutine (timer(0.4f));
@@ -188,7 +188,7 @@ public class Gesture : MonoBehaviour {
 				if (!deactivate && !isSwiping && hand.PinchStrength > 0.7f && middleFinger.IsExtended && ringFinger.IsExtended && pinkyFinger.IsExtended) {
 
 					isPinching = true;
-					StartCoroutine (timer(0.6f));
+					StartCoroutine (timer(0.4f));
 					return true;
 
 				} else {
@@ -212,7 +212,7 @@ public class Gesture : MonoBehaviour {
 
 				if (middleFinger.TipVelocity.x < middleFinger.TipVelocity.y) {
 
-					if (!deactivate && !isSwiping && !isHandClosed && !isPinching && middleFinger.TipVelocity.x < sensitivity && middleFinger.TipVelocity.y < -1 ) {
+					if (!deactivate && !isSwiping && !isHandClosed && middleFinger.TipVelocity.x < sensitivity && middleFinger.TipVelocity.y < -1 ) {
 
 						isSwiping = true;
 
@@ -241,7 +241,7 @@ public class Gesture : MonoBehaviour {
 
 				if (middleFinger.TipVelocity.x > middleFinger.TipVelocity.y) {
 
-					if (!deactivate && !isHandClosed && !isSwiping && !isPinching && middleFinger.TipVelocity.x > sensitivity && middleFinger.TipVelocity.y < -1 ) {
+					if (!deactivate && !isHandClosed && !isSwiping  && middleFinger.TipVelocity.x > sensitivity && middleFinger.TipVelocity.y < -1 ) {
 
 						isSwiping = true;
 
