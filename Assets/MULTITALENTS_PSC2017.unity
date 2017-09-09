@@ -1379,7 +1379,7 @@ GameObject:
   - component: {fileID: 1175545819}
   - component: {fileID: 1175545818}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: GameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2600,6 +2600,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1677659252}
+  - component: {fileID: 1677659253}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -2627,6 +2628,34 @@ RectTransform:
   m_AnchoredPosition: {x: 399.94394, y: 225.06236}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1677659253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1677659251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b5253a722e0aa04fb0befcc358ec140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remap: {fileID: 1959928627}
+  gesture: {fileID: 1959928625}
+  delaySwipeLeft: 0.2
+  delaySwipeRight: 0.2
+  sensitivitySwipeLeft: -0.2
+  sensitivitySwipeRight: 0.16
+  temporizador: {fileID: 1989831608}
+  targetMovingTime: 1
+  part1: {fileID: 1861092345}
+  part3: {fileID: 248506464}
+  ending: {fileID: 1866089044}
+  GameGO: {fileID: 1759719110}
+  GameCanvas: {fileID: 1175545816}
+  circle: {fileID: 566925807}
+  stageText: {fileID: 1225488943}
+  taskD: {fileID: 2001869853}
+  times: {fileID: 1477116511}
 --- !u!1 &1740620424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,7 +2764,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1759719111}
-  - component: {fileID: 1759719112}
   m_Layer: 0
   m_Name: Stages
   m_TagString: Untagged
@@ -2766,34 +2794,6 @@ Transform:
   m_Father: {fileID: 1677659252}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1759719112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1759719110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b5253a722e0aa04fb0befcc358ec140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  remap: {fileID: 1959928627}
-  gesture: {fileID: 1959928625}
-  delaySwipeLeft: 0.2
-  delaySwipeRight: 0.2
-  sensitivitySwipeLeft: -0.2
-  sensitivitySwipeRight: 0.16
-  temporizador: {fileID: 1989831608}
-  targetMovingTime: 1
-  part1: {fileID: 1861092345}
-  part3: {fileID: 248506464}
-  ending: {fileID: 1866089044}
-  countdown: {fileID: 1180288639}
-  GameGO: {fileID: 1677659251}
-  pBar: {fileID: 1989831608}
-  stageText: {fileID: 1225488943}
-  taskD: {fileID: 2001869853}
-  times: {fileID: 1477116511}
 --- !u!4 &1818649072 stripped
 Transform:
   m_PrefabParentObject: {fileID: 464466, guid: 39d18871c11b53c4082d8202e3db68a3, type: 2}
@@ -2903,7 +2903,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1866089046}
-  - component: {fileID: 1866089045}
   m_Layer: 0
   m_Name: Ending
   m_TagString: Untagged
@@ -2911,19 +2910,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1866089045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1866089044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01543bb9cd443248a4123f51acc4925, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  part1: {fileID: 1861092345}
-  part4: {fileID: 1866089044}
 --- !u!4 &1866089046
 Transform:
   m_ObjectHideFlags: 0

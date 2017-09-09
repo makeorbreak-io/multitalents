@@ -183,7 +183,6 @@
      <Compile Include="Assets\LeapMotion\Core\Scripts\VR\LeapVRTemporalWarping.cs" />
      <Compile Include="Assets\LeapMotion\Core\Scripts\VR\TemporalWarpingStatus.cs" />
      <Compile Include="Assets\LeapMotion\Core\Scripts\VR\VRHeightOffset.cs" />
-     <Compile Include="Assets\Script\end.cs" />
      <Compile Include="Assets\Script\Game.cs" />
      <Compile Include="Assets\Script\Gesture.cs" />
      <Compile Include="Assets\Script\Remap.cs" />
