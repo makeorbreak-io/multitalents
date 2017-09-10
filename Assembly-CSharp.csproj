@@ -188,7 +188,7 @@
      <Compile Include="Assets\Script\Gesture.cs" />
      <Compile Include="Assets\Script\Remap.cs" />
      <Compile Include="Assets\Script\SkipToPlay.cs" />
-     <Compile Include="Assets\StartCycle.cs" />
+     <Compile Include="Assets\Script\StartCycle.cs" />
      <None Include="Assets\LeapMotion\Core\Resources\LeapCG.cginc" />
      <None Include="Assets\LeapMotion\Core\README_BEFORE_UPDATING.txt" />
      <None Include="Assets\LeapMotion\Core\readme.txt" />
