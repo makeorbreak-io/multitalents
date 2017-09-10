@@ -40,6 +40,8 @@ public class Gesture : MonoBehaviour {
 			nrHands = 0;
 
 		}
+
+    
 		/// <summary>
 		/// Inicializar dedos, assim como garantir que existem mãos
 		/// </summary>
@@ -73,7 +75,21 @@ public class Gesture : MonoBehaviour {
 
 		}
 
-	IEnumerator timer(float nr){
+
+    public bool checkHands()
+    {
+
+        initializeFingersHands();
+        if (nrHands > 0) {
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    IEnumerator timer(float nr){
 	
 		deactivate = true;
 		yield return new WaitForSeconds (nr);
@@ -101,7 +117,7 @@ public class Gesture : MonoBehaviour {
 		
 			if (hasHands) {
 			
-				if (!deactivate && !isSwiping && !isPinching && hand.GrabStrength < 0.2f) {
+				if (!deactivate && !isSwiping && hand.GrabStrength < 0.2f) {
 
 					isHandOpen = true;
 					StartCoroutine (timer(0.4f));
@@ -208,11 +224,11 @@ public class Gesture : MonoBehaviour {
 
 		foreach (Hand hand in frame.Hands) {
 
-			if (hasHands) {
+			if (nrHands>0) {
 
 				if (middleFinger.TipVelocity.x < middleFinger.TipVelocity.y) {
 
-					if (!deactivate && !isSwiping && !isHandClosed && middleFinger.TipVelocity.x < sensitivity && middleFinger.TipVelocity.y < -1 ) {
+					if (!deactivate && !isSwiping  && !isHandClosed && middleFinger.TipVelocity.x < sensitivity && middleFinger.TipVelocity.y < -1 ) {
 
 						isSwiping = true;
 
@@ -237,11 +253,11 @@ public class Gesture : MonoBehaviour {
 
 		foreach (Hand hand in frame.Hands) {
 
-			if (hasHands) {
+			if (nrHands>0) {
 
 				if (middleFinger.TipVelocity.x > middleFinger.TipVelocity.y) {
 
-					if (!deactivate && !isHandClosed && !isSwiping  && middleFinger.TipVelocity.x > sensitivity && middleFinger.TipVelocity.y < -1 ) {
+					if (!deactivate && !isHandClosed && !isSwiping && middleFinger.TipVelocity.x > sensitivity && middleFinger.TipVelocity.y < -1 ) {
 
 						isSwiping = true;
 

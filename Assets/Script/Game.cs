@@ -30,7 +30,7 @@ public class Game : MonoBehaviour {
 	private int currentStage;
 	private int targetTask;
 	private int counterTask;
-	private float counterCircle;
+	
 
 	private bool alternateHand;
 
@@ -40,22 +40,13 @@ public class Game : MonoBehaviour {
 	public GameObject GameGO;
 	public GameObject GameCanvas;
 
-	public GameObject zeroG;
-	public GameObject umG;
-	public GameObject doisG;
-	public GameObject tresG;
-	public GameObject quatroG;
-	public GameObject cincoG;
-	public GameObject seisG;
-	public GameObject seteG;
-	public GameObject oitoG;
-	public GameObject noveG;
-
-
 	public Image circle;
 	public Text stageText;
 	public Text taskD;
 	public Text times;
+    public Text ScoreTXT;
+
+	private int score;
 
 
 
@@ -83,16 +74,24 @@ public class Game : MonoBehaviour {
 
 		}
 
-		gameTime = 180;
+		gameTime = 90;
 
 		generateTask ();
 
 		stageNumber = 1;
+        ScoreTXT.text = "SCORE:" +0;
+    }
 
+
+	public int getScore(){
+
+		return score;
 	}
 
+	public void setScore(int value){
 
-
+		score = value;
+	}
 
 	private void generateTask(){
 
@@ -115,7 +114,7 @@ public class Game : MonoBehaviour {
 		}
 
 		counterTask = targetTask;
-		counterCircle = targetTask;
+	
 		times.text=counterTask+"x";
 		circle.fillAmount = 1;
 	}
@@ -125,7 +124,7 @@ public class Game : MonoBehaviour {
 		if (gameTime > 0) {
 	
 			gameTime -= Time.deltaTime;
-			temporizador.fillAmount = remap.remap (gameTime, 0, 180, 0, 1);
+			temporizador.fillAmount = remap.remap (gameTime, 0, 90, 0, 1);
 		
 		} else {
 		
@@ -144,7 +143,7 @@ public class Game : MonoBehaviour {
 			////////////////////CONTEÚDO Gráfico//////////////////
 
 			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
-			taskD.text = "Pinch!";
+			taskD.text = "PINCH!";
 
 
 			if (counterTask > 0) {
@@ -156,19 +155,21 @@ public class Game : MonoBehaviour {
 					if (counterTask >=1) {
 						times.text = counterTask + "x";	
 					}
-				//	counterCircle -= 1 / targetTask;
-				//	circle.fillAmount = counterCircle;
+					
+			    	circle.fillAmount = remap.remap(counterTask,0,targetTask,0,1);
 				}
 
 
 			} else {
-			
+
 				GameCanvas.gameObject.SetActive (false);
 				movingTime = 0;
 				moving = true;
 				circle.fillAmount = 1;
 				stageNumber++;
-			}
+                score += 10;
+                ScoreTXT.text = "SCORE: " + score;
+            }
 			 
 		}
 
@@ -178,7 +179,7 @@ public class Game : MonoBehaviour {
 		
 
 			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
-			taskD.text = "CLOSE AND OPEN \nYour HAND";
+			taskD.text = "CLOSE AND OPEN \nYOUR HAND";
 
 
 			if (counterTask > 0) {
@@ -192,8 +193,9 @@ public class Game : MonoBehaviour {
 					if (counterTask >=1) {
 						times.text = counterTask + "x";	
 					}
-						circle.fillAmount -= 1 / targetTask;
-					}
+
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
+                }
 
 
 					if (gesture.openHand () && alternateHand) {
@@ -205,10 +207,10 @@ public class Game : MonoBehaviour {
 					if (counterTask >=1) {
 						times.text = counterTask + "x";	
 					}
-					circle.fillAmount -= 1 / targetTask;
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
 
-					
-					}
+
+                }
 			
 
 			} else {
@@ -219,7 +221,9 @@ public class Game : MonoBehaviour {
 				moving = true;
 				circle.fillAmount = 1;
 				stageNumber++;
-			}
+                score += 10;
+                ScoreTXT.text = "SCORE: "+score;
+            }
 
 		}
 
@@ -238,8 +242,8 @@ public class Game : MonoBehaviour {
 					if (counterTask >=1) {
 						times.text = counterTask + "x";	
 					}
-					circle.fillAmount -= 1 / targetTask;
-				}
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
+                }
 
 
 
@@ -250,7 +254,9 @@ public class Game : MonoBehaviour {
 				moving = true;
 				circle.fillAmount = 1;
 				stageNumber++;
-			}
+                score += 10;
+                ScoreTXT.text = "SCORE: "+score;
+            }
 
 		}
 
@@ -264,13 +270,14 @@ public class Game : MonoBehaviour {
 
 				if (gesture.swipeRight (sensitivitySwipeRight, delaySwipeRight) ) {
 
+					Debug.Log ("Entra");
 						counterTask--;
 
 					if (counterTask >= 1) {
 						times.text = counterTask + "x";	
 					}
-					circle.fillAmount -= 1 / targetTask;
-				}
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
+                }
 
 
 
@@ -281,14 +288,16 @@ public class Game : MonoBehaviour {
 				moving = true;
 				circle.fillAmount = 1;
 				stageNumber++;
-			}
+                score += 10;
+                ScoreTXT.text = "SCORE: " + score;
+            }
 
 		}
 	
 		if (task == 4 && !moving) {
 
 			stageText.text= "STAGE "+ (stageNumber).ToString()+" -";
-			taskD.text = "Horns!";
+			taskD.text = "HORNS THEN \nOPEN YOUR HAND!";
 
 
 			if (counterTask > 0) {
@@ -297,31 +306,31 @@ public class Game : MonoBehaviour {
 
 					alternateHand = true;
 
-
-						counterTask--;
+					counterTask--;
 
 					
 					if (counterTask >=1) {
+						
 						times.text = counterTask + "x";	
+
 					}
-					circle.fillAmount -= 1 / targetTask;
-				}
+
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
+                }
 
 
 				if (gesture.openHand () && alternateHand) {
 
 					alternateHand = false;
 		
-
-
-						counterTask--;
+					counterTask--;
 
 					if (counterTask >=1) {
 						times.text = counterTask + "x";	
 					}
-					circle.fillAmount -= 1 / targetTask;
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
 
-				}
+                }
 
 
 			} else {
@@ -332,7 +341,9 @@ public class Game : MonoBehaviour {
 				moving = true;
 				circle.fillAmount = 1;
 				stageNumber++;
-			}
+                score += 10;
+                ScoreTXT.text = "SCORE: " + score;
+            }
 
 		}
 
@@ -354,8 +365,8 @@ public class Game : MonoBehaviour {
 						
 						times.text = counterTask + "x";	
 					}
-					circle.fillAmount -= 1 / targetTask;
-				}
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
+                }
 
 
 				if (gesture.swipeRight (sensitivitySwipeRight, delaySwipeRight) && alternateHand) {
@@ -368,9 +379,9 @@ public class Game : MonoBehaviour {
 					if (counterTask >=1) {
 						times.text = counterTask + "x";	
 					}
-					circle.fillAmount -= 1 / targetTask;
+                    circle.fillAmount = remap.remap(counterTask, 0, targetTask, 0, 1);
 
-				}
+                }
 
 
 			} else {
@@ -381,7 +392,9 @@ public class Game : MonoBehaviour {
 				moving = true;
 				circle.fillAmount = 1;
 				stageNumber++;
-			}
+                score += 10;
+                ScoreTXT.text = "SCORE: " + score;
+            }
 
 		}
 
@@ -434,28 +447,7 @@ public class Game : MonoBehaviour {
 		}
 	
 	}
-
-
-	IEnumerator timerEnding(){
-
-		yield return new WaitForSeconds (10);
-
-		stageNumber = 1;
-		part1.SetActive (true);
-		zeroG.SetActive (true);
-		umG.SetActive (false);
-		doisG.SetActive (false);
-		tresG.SetActive (false);
-		quatroG.SetActive (false);
-		cincoG.SetActive (false);
-		seisG.SetActive (false);
-		seteG.SetActive (false);
-		oitoG.SetActive (false);
-		noveG.SetActive (false);
-		ending.gameObject.SetActive (false);
-
-
-	}
+		
 
 	// Update is called once per frame
 	void Update () {
@@ -464,35 +456,20 @@ public class Game : MonoBehaviour {
 		
 			taskToDo ();
 			nextStage ();
-			Debug.Log ("newStage"+ newStage);
-			Debug.Log ("currentStage"+ currentStage);
-		    //Debug.Log ("counterCircle"+ counterCircle);
-		//	Debug.Log ("counterTask"+ counterTask);
+	
+			//Debug.Log(alternateHand);
 			gameTimeHandler ();
 
 		} else {
 			temporizador.fillAmount = 1;
-			ending.SetActive (true);
 
 			circle.fillAmount = 1;
-
-			zeroG.SetActive (false);
-			umG.SetActive (false);
-			doisG.SetActive (false);
-			tresG.SetActive (false);
-			quatroG.SetActive (false);
-			cincoG.SetActive (false);
-			seisG.SetActive (false);
-			seteG.SetActive (false);
-			oitoG.SetActive (false);
-			noveG.SetActive (false);
-
-
+			stageNumber = 1;
 			GameCanvas.gameObject.SetActive (false);
-			gameTime = 180;
+			gameTime = 90;
 			generateTask ();
-
-		
+			ending.SetActive (true);
+			this.gameObject.SetActive (false);
 		}
 
 

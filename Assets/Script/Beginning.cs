@@ -13,6 +13,7 @@ public class Beginning : MonoBehaviour {
 	public Text um;
 	private float timer;
 	public GameObject game;
+	public GameObject Stages;
 
 	void Start () {
 		
@@ -25,6 +26,7 @@ public class Beginning : MonoBehaviour {
 		if(timer>5){
 
 			timer = 0;
+			Stages.gameObject.SetActive (true);
 			game.gameObject.SetActive (true);
 			this.gameObject.SetActive (false);
 			cinco.gameObject.SetActive (true);
