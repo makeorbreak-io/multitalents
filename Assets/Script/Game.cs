@@ -62,6 +62,8 @@ public class Game : MonoBehaviour {
 	private int trollCount;
 	private float trollTimer;
 
+	private bool showingFace;
+
 
 	// Use this for initialization
 	void Start () {
@@ -447,7 +449,12 @@ public class Game : MonoBehaviour {
 					Debug.Log ("ENTRA ");
 
 					score += 3;
-					StartCoroutine ("trumpTimer");
+
+					if (!showingFace) {
+
+						StartCoroutine ("trumpTimer");
+
+					}
 					trollCount++;
 					trollTime.text = "" + trollCount;
 					ScoreTXT.text = "SCORE: " + score;
@@ -494,7 +501,13 @@ public class Game : MonoBehaviour {
 
 
 					score += 6;
-					StartCoroutine ("kimTimer");
+
+					if (!showingFace) {
+					
+						StartCoroutine ("kimTimer");
+					
+					}
+
 					trollCount++;
 					trollTime.text = "" + trollCount;
 					ScoreTXT.text = "SCORE: " + score;
@@ -581,22 +594,43 @@ public class Game : MonoBehaviour {
 
 	IEnumerator trumpTimer(){
 	
+		showingFace = true;
+
 		Trump2.gameObject.SetActive (true);
 		Trump1.gameObject.SetActive (false);
 		yield return new WaitForSeconds (delaySwipeLeft);
 		Trump2.gameObject.SetActive (false);
-		Trump1.gameObject.SetActive (true);
-	
+			
+		if (moving || task != 6) {
+
+			Trump1.gameObject.SetActive (false);
+
+		}else{
+
+			Trump1.gameObject.SetActive (true);
+
+		}
+
+		showingFace = false;
 	}
 
 	IEnumerator kimTimer(){
-
+		showingFace = true;
 		Kim2.gameObject.SetActive (true);
 		Kim1.gameObject.SetActive (false);
 		yield return new WaitForSeconds (delaySwipeLeft);
 		Kim2.gameObject.SetActive (false);
-		Kim1.gameObject.SetActive (true);
 
+		if (moving || task != 7) {
+
+			Kim1.gameObject.SetActive (false);
+
+		}else{
+
+			Kim1.gameObject.SetActive (true);
+
+		}
+		showingFace = false;
 	}
 
 	// Update is called once per frame
